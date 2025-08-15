@@ -1,0 +1,62 @@
+﻿1. The Publisher issues events of interest to other objects. 
+	These events occur when the publisher changes its state or executes some behaviors. 
+	Publishers contain a subscription infrastructure that lets new subscribers join 
+	and current subscribers leave the list.
+
+	private readonly List<ILogObserver> logObserversList = new();
+	public void NotifyObservers(string message, LogLevel level);
+
+2. When a new event happens, the publisher goes over the subscription list and calls the notification 
+	method declared in the subscriber interface on each subscriber object
+	void OnLog(string message, LogLevel level); 
+	=>
+	public void NotifyObservers(string message, LogLevel level)
+		{
+            foreach (var observer in logObserversList)
+            {
+				observer.OnLog(message, level);
+            }
+        }
+
+3. The Subscriber interface declares the notification interface. 
+	In most cases, it consists of a single update method. 
+	The method may have several parameters that let the publisher 
+	pass some event details along with the update.
+
+	public interface ILogObserver
+	{
+		void OnLog(string message, LogLevel level);
+	}
+
+4. Concrete Subscribers perform some actions in response to notifications issued by the publisher. 
+	All of these classes must implement the same interface so the publisher 
+	isn’t coupled to concrete classes
+
+	public class EmailAlertObserver : ILogObserver
+	{
+		public void OnLog(string message, LogLevel level)
+	}
+	public class ConsoleLogObserver : ILogObserver
+	{
+		public void OnLog(string message, LogLevel level)
+	}
+
+5. Usually, subscribers need some contextual information to handle the update correctly. 
+	For this reason, publishers often pass some context data as arguments of the notification method
+	
+	string message
+	public void OnLog(string message, LogLevel level)
+
+6. The Client creates publisher and subscriber objects separately and 
+	then registers subscribers for publisher updates.
+
+	var logger = new Logger();
+
+	ILogObserver consoleLog = new ConsoleLogObserver();
+	ILogObserver emailLog = new EmailAlertObserver();
+
+	logger.Add(consoleLog);
+	logger.Add(emailLog);
+
+	logger.NotifyObservers("test", LogLevel.Info);
+	logger.NotifyObservers("critical test", LogLevel.Critical);

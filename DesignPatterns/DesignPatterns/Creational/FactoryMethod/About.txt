@@ -1,0 +1,28 @@
+﻿1. The Product declares the interface (abstract class), which is common to all objects 
+	that can be produced by the creator and its subclasses.
+
+public abstract class Mage : Unit
+
+2. Concrete Products are different implementations of the product interface.
+
+public class FireMage : Mage
+public class IceMage : Mage
+
+3. The Creator class declares the factory method that returns new product objects.
+	You can declare the factory method as abstract
+	public  class MageCreator {
+		public virtual Mage CreateMage() {
+			return new Mage("Name", 50, 50, 50);
+		}
+	}
+
+4. Concrete Creators override the base factory method so it returns a different type of product.
+	public class IceMageCreator : MageCreator
+	{
+		public override Mage CreateMage()
+		{
+			return new IceMage("IceMage", 50, 50, 50);
+		}
+	}
+	
+

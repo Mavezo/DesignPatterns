@@ -1,0 +1,18 @@
+﻿1. Abstract Products declare interfaces for a set of distinct but related products which make up a product family:
+Mage, Warrior
+
+2. Concrete Products are various implementations of abstract products, grouped by variants. 
+Each abstract product (chair/sofa) must be implemented in all given variants (Victorian/Modern):
+FireMage/FireWarrior and IceMage/IceWarrior
+
+3. The Abstract Factory interface declares a set of methods for creating each of the abstract products:
+		public Mage CreateMage();
+		public Warrior CreateWarrior();
+
+4. Concrete Factories implement creation methods of the abstract factory. 
+    Each concrete factory corresponds to a specific variant of products and creates only those product variants.
+		public class IceFactory : IUnitFactory
+		public class FireFactory : IUnitFactory
+
+5. Although concrete factories instantiate concrete products, signatures of 
+	their creation methods must return corresponding abstract products. 

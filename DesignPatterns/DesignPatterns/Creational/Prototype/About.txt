@@ -1,0 +1,15 @@
+﻿1. The Prototype interface declares the cloning methods. In most cases, it’s a single clone method.
+	public interface IPrototype<T>
+		{
+			T Clone();
+		}
+
+2. The Concrete Prototype class implements the cloning method
+	public abstract class Unit : IPrototype<Unit>{
+		public abstract Unit Clone();
+	}
+
+3. The Client can produce a copy of any object that follows the prototype interface.
+	Mage copy1 = mage1.Clone();
+	Mage copy2 = new Mage(mage1);
+

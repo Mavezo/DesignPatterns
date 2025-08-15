@@ -1,0 +1,25 @@
+﻿1. The Builder interface declares product construction steps that are common to all types of builders.
+		public interface IUnitBuilder
+		{}
+
+2. Concrete Builders provide different implementations of the construction steps. 
+	Concrete builders may produce products that don’t follow the common interface.
+		MageBuilder | WarriorBuilder 
+
+3. Products are resulting objects. Products constructed by different builders don’t 
+	have to belong to the same class hierarchy or interface
+		Mage | Warrior
+
+4. The Director class defines the order in which to call construction steps, so you can create and reuse specific configurations of products.
+	CreateDefaultWarrior(IUnitBuilder builder)
+		{
+			return builder
+				.SetName("Conan")
+				.SetHP(250)
+				.SetDamage(25)
+				.SetWeapon("Sword")
+				.Build();
+		}
+
+5. The Client must associate one of the builder objects with the director
+5.1 However, there’s an alternative approach for when the client passes the builder object to the production method of the director

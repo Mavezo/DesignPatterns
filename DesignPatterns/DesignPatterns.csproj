@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DesignPatterns\Behavioral\Command\" />
+    <Folder Include="DesignPatterns\Behavioral\Iterator\" />
+    <Folder Include="DesignPatterns\Behavioral\ChainOfResponsibility\" />
+    <Folder Include="DesignPatterns\Behavioral\Memento\" />
+    <Folder Include="DesignPatterns\Behavioral\Visitor\" />
+    <Folder Include="DesignPatterns\Behavioral\Template Method\" />
+    <Folder Include="DesignPatterns\Behavioral\State\" />
+    <Folder Include="DesignPatterns\Behavioral\Mediator\" />
+    <Folder Include="DesignPatterns\Structural\Proxy\" />
+    <Folder Include="DesignPatterns\Structural\Flyweight\" />
+    <Folder Include="DesignPatterns\Structural\Facade\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Scrutor" Version="6.1.0" />
+  </ItemGroup>
+
+</Project>

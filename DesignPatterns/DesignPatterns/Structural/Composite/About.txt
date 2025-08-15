@@ -1,0 +1,44 @@
+﻿1. The Component interface describes operations that are common to both simple and complex elements of the tree
+	public interface IGUIComponent
+    {
+        public void Render(string indent = "");
+    }
+
+2. The Leaf is a basic element of a tree that doesn’t have sub-elements.
+    public class Button : IGUIComponent
+    public class Label : IGUIComponent
+    public class TextBox
+
+3. The Container (aka composite) is an element that has sub-elements: leaves or other containers. 
+    A container doesn’t know the concrete classes of its children. 
+    It works with all sub-elements only via the component interface.
+
+    public class Panel : IGUIComponent
+	{
+		private List<IGUIComponent> children = new();
+		public Panel(string name)
+		public void Add(IGUIComponent element);
+		public void Remove(IGUIComponent element);
+		public void Render(string indent = "");
+	}
+
+4. The Client works with all elements through the component interface. 
+    As a result, the client can work in the same way with both simple or complex elements of the tree
+
+     var mainWindow = new Panel("MainWindow");
+
+        var topPanel = new Panel("TopPanel");
+        topPanel.Add(new Label("Welcome to the app!"));
+        topPanel.Add(new Button("Logout"));
+
+        var formPanel = new Panel("LoginForm");
+        formPanel.Add(new Label("Username:"));
+        formPanel.Add(new TextBox("Enter username"));
+        formPanel.Add(new Label("Password:"));
+        formPanel.Add(new TextBox("Enter password"));
+        formPanel.Add(new Button("Login"));
+
+        mainWindow.Add(topPanel);
+        mainWindow.Add(formPanel);
+
+        mainWindow.Render();
